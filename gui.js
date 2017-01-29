@@ -35,16 +35,11 @@ function initSearchByTrait(people){
 			initSearchByTrait(people);
 		}
 }
-
-
-
-
 function getName(people){
 	var userName = prompt("enter a first name");
 	var userlastName = prompt("enter a last name");
 	findName(people, userName, userlastName);
 }
-
 function findName(people, userName, userlastName){
 	var searchName = people.filter(function(person){
         if(person.firstName.toLowerCase() === userName.toLowerCase() || person.lastName.toLowerCase() === userName.toLowerCase()){
@@ -61,7 +56,8 @@ function printSearchName(people, searchName){
 	var decendentsChoice = prompt("Would your like to see this persons decendents? ");
 	switch(decendentsChoice){
 	case "yes":
-  descendents(people, searchName);
+  var descendent = descendents(people, searchName);
+	printDescendents(descendent, people);
 	break;
 	case "no":
 	initSearch(people);
@@ -69,41 +65,47 @@ function printSearchName(people, searchName){
 	default:
 	alert("please enter a valid selection");
 	break;
+	}
 }
-}
-
-
 function descendents(people, searchName){
 var nameID = searchName[0].id;
-findDescendents(people, nameID);
+var descendent = findDescendents(people, nameID, counter =-1, descendentslist=[]);
+return descendent;
 }
-function findDescendents(people, nameID){
-	var filterDecendents = people.filter(function(person){
-        if(person.id === nameID()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    });
+function findDescendents(people, nameID, counter =-1, descendentslist=[]){
+	if(nameID !== undefined) {
+		var filterDecendents = people.filter(function(person){
+          return person.parents.includes(nameID);
+      });
+      descendentslist.push(...filterDecendents);
+      counter++;
+			findDescendents(people, descendentslist[counter], counter, descendentslist);
+   }
+    return descendentslist;
 }
 
-
+function printDescendents(descendent, people){
+		for (var i = 0; i < descendent.length; i++) {
+			if(descendent.length !== null)
+          alert("Descendents:\n" + descendent[i].firstName + " " + descendent[i].lastName + "\nGender: " + descendent[i].gender + "\nOccupation: " + descendent[i].occupation);
+				}
+}
 
 function getAge(people){
 	var Userage = prompt("Please enter the users age");
 	findAge(people, age);
 }
-function convertAge(people, Userage, tempAge=[]){
-	var today = new Date();
-		var dob = new Date();
-		var age = today.getFullYear() - dob.getFullYear();
-		var m = today.getMonth() - dob.getMonth();
-		if (m < 0 || m === 0 && today.getDate() < dob.getDate())
-		{
-				age--;
-		}
-		return age;
+function convertAge(dateString)
+{
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || m === 0 && today.getDate() < birthDate.getDate())
+    {
+        age--;
+    }
+    return age;
 }
 function findAge(people, userAge){
 	var searchAge = people.filter(function(person){
@@ -118,21 +120,15 @@ function findAge(people, userAge){
 function printAge(people){
 
 }
-
-
-
-
 function displayResults(searchName, i, people){
 
 }
-
 function nextkin(){
 
 }
 function family(){
 
 }
-
 function isNumeric() {
 
 }
@@ -153,6 +149,7 @@ function findHeight(people, enterHeight){
 			}
 	});
 	}
+
 function getWeight(){
 
 }
