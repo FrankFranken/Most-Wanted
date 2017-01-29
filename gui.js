@@ -13,7 +13,7 @@ function initSearch(people){
 	}
 }
 function initSearchByTrait(people){
-		var search = prompt("Would you like to search by height, weight, or eyecolor?");
+		var search = prompt("Would you like to search by height, weight, age, occupation, or eyecolor?");
 		switch(search){
 			case "height":
 			getHeight(people);
@@ -31,7 +31,7 @@ function initSearchByTrait(people){
 			getOccupation(people);
 			break;
 			default:
-			alert("Please enter height, weight, or eyecolor");
+			alert("Please enter height, weight, age, occupation, or eyecolor");
 			initSearchByTrait(people);
 		}
 }
@@ -86,40 +86,48 @@ function findDescendents(people, nameID, counter =-1, descendentslist=[]){
 
 function printDescendents(descendent, people){
 		for (var i = 0; i < descendent.length; i++) {
-			if(descendent.length !== null)
+			if(descendent.length !== null){
           alert("Descendents:\n" + descendent[i].firstName + " " + descendent[i].lastName + "\nGender: " + descendent[i].gender + "\nOccupation: " + descendent[i].occupation);
+					initSearch(people);
 				}
-}
+				}
+				alert("This person has 0 Descendents");
+				initSearch(people);
+			}
 
 function getAge(people){
-	var Userage = prompt("Please enter the users age");
-	findAge(people, age);
+	var userAge = prompt("Please enter the users age");
+	convertAge(people, userAge);
 }
-function convertAge(dateString)
+function convertAge(people, userAge)
 {
     var today = new Date();
-    var birthDate = new Date(dateString);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || m === 0 && today.getDate() < birthDate.getDate())
-    {
-        age--;
-    }
-    return age;
-}
-function findAge(people, userAge){
+    var birthDate = parseInt(userAge);
+    var age = today.getFullYear() - birthDate;
+    var yearBorn = age.toString();
+    findAge(people, yearBorn, birthDate);
+	}
+function findAge(people, yearBorn, birthDate){
 	var searchAge = people.filter(function(person){
-        if(person.dob.tostring() === userAge.toLowerCase() || person.dob.toLowerCase() === userAge.toLowerCase()){
+        if(person.dob.slice(-4) === yearBorn){
             return true;
         }
         else{
             return false;
         }
     });
+		printAge(people, searchAge, birthDate);
 }
-function printAge(people){
-
-}
+function printAge(people, searchAge, birthDate){
+	for (var i = 0; i < searchAge.length; i++) {
+		if(searchAge.length !== null){
+				alert("Age Found:\n\n"+ searchAge[i].firstName + " " + searchAge[i].lastName + "\nAge " + birthDate + "\nGender: " + searchAge[i].gender + "\nOccupation: " + searchAge[i].occupation);
+				initSearch(people);
+			}
+			}
+			alert("No matches for this specific age");
+			initSearch(people);
+		}
 function displayResults(searchName, i, people){
 
 }
