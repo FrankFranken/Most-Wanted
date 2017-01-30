@@ -210,6 +210,7 @@ function findOccupation(people, userOccupation){
     });
     printOccupation(people, filterOccupation);
 }
+
 function printOccupation(people, filterOccupation){
 	for (let i = 0; i < filterOccupation.length; i++) {
 		if(filterOccupation.length !== null){
@@ -220,11 +221,36 @@ function printOccupation(people, filterOccupation){
 		else if(filterOccupation.length === null){
 			alert("No matches for this occupation");
 			}
-		}
+	}
 		initSearch(people);
-			}
+}
 
-function displayResults(searchName, i, people){
+function getEyeColor(people){
+var eye = prompt("Please enter eye color");
+findEyeColor(people, eye);
+}
+function findEyeColor(people, eye){
+	var filterEye = people.filter(function(people){
+		if(people.eyeColor === eye.toLowerCase()){
+				return true;
+			}
+		});
+		printEyeColor(people, filterEye);
+	}
+function printEyeColor(people, filterEye){
+	for (let i = 0; i < filterEye.length; i++) {
+		if(filterEye.length !== null){
+				alert("Eye color Found:\n\n"+ filterEye[i].firstName + " " +
+				filterEye[i].lastName  + "\nGender: " + filterEye[i].gender + "\nOccupation: " +
+				filterEye[i].occupation);
+			}
+		else if(filterEye.length === null){
+			alert("No matches for this eye color");
+			}
+	}
+		initSearch(people);
+	}
+function displayResults(){
 
 }
 function nextkin(){
@@ -234,8 +260,5 @@ function family(){
 
 }
 function isNumeric() {
-
-}
-function getEye(){
 
 }
