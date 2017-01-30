@@ -135,13 +135,12 @@ function printAge(people, searchAge, birthDate){
 		}
 		initSearch(people);
 			}
-
 function getWeight(people){
 var userWeight = prompt("Please enter a weight to search (must be # of lbs)");
-filterWeight(people, userWeight);
+var weight = parseFloat(userWeight);
+filterWeight(people, weight);
 }
-function filterWeight(people, userWeight){
-	var weight = floatParse(userWeight);
+function filterWeight(people, weight){
 	var searchWeight = people.filter(function(person){
 				if(person.weight === weight){
 						return true;
@@ -155,7 +154,9 @@ function filterWeight(people, userWeight){
 function printWeight(people, searchWeight){
 	for (let i = 0; i < searchWeight.length; i++) {
 		if(searchWeight.length !== null){
-				alert("Weight Found:\n\n"+ searchWeight[i].firstName + " " + searchWeight[i].lastName  + "\nGender: " + searchWeight[i].gender + "\nOccupation: " + searchWeight[i].occupation);
+				alert("Weight Found:\n\n"+ searchWeight[i].firstName + " " +
+				searchWeight[i].lastName  + "\nGender: " + searchWeight[i].gender + "\nOccupation: " +
+				searchWeight[i].occupation);
 			}
 		else if(searchWeight.length === null){
 			alert("No matches for this specific weight");
@@ -163,6 +164,66 @@ function printWeight(people, searchWeight){
 		}
 		initSearch(people);
 			}
+
+function getHeight(people){
+ var enterHeight = prompt("Please enter a height");
+ var newHeight = enterHeight.split("'");
+ var removeFeet = newHeight[0];
+ var removeInches = newHeight[1].replace('"', '');
+ var feet = parseFloat(removeFeet);
+ var inch = parseFloat(removeInches);
+				findHeight(people, feet, inch);
+			}
+			function findHeight(people, feet, inch){
+				var userHeight = inch + feet * 12;
+				var searchHeight = people.filter(function(person){
+						if(people.height === searchHeight){
+								return true;
+						}
+						else{
+								return false;
+						}
+				});
+			}
+function printHeight(people, searchHeight){
+	for (let i = 0; i < searchHeight.length; i++) {
+		if(searchHeight.length !== null){
+				alert("Height Found:\n\n"+ searchHeight[i].firstName + " " +
+				searchHeight[i].lastName + "\nAge " + "\nGender: " +
+				searchHeight[i].gender + "\nOccupation: " + searchHeight[i].occupation);
+			}
+		else if(searchHeight.length === null){
+			alert("No matches for this specific height");
+			}
+		}
+		initSearch(people);
+			}
+function getOccupation(people){
+	var userOccupation = prompt("Please enter an occupation");
+	findOccupation(people, userOccupation);
+}
+function findOccupation(people, userOccupation){
+	var filterOccupation = people.filter(function(people){
+		if(people.occupation === userOccupation.toLowerCase()){
+        return true;
+			}
+    });
+    printOccupation(people, filterOccupation);
+}
+function printOccupation(people, filterOccupation){
+	for (let i = 0; i < filterOccupation.length; i++) {
+		if(filterOccupation.length !== null){
+				alert("Occupation Found:\n\n"+ filterOccupation[i].firstName + " " +
+				filterOccupation[i].lastName  + "\nGender: " + filterOccupation[i].gender + "\nOccupation: " +
+				filterOccupation[i].occupation);
+			}
+		else if(filterOccupation.length === null){
+			alert("No matches for this occupation");
+			}
+		}
+		initSearch(people);
+			}
+
 function displayResults(searchName, i, people){
 
 }
@@ -175,26 +236,6 @@ function family(){
 function isNumeric() {
 
 }
-function getHeight(people){
-	var enterHeight = prompt("Please enter a height");
-	setHeight(people, enterHeight);
-}
-function setHeight(people, enterHeight){
-	var convertedHeight=[] = enterHeight / 12;
-}
-function findHeight(people, enterHeight){
-	var searchHeight = people.filter(function(person){
-			if(person.firstname.toLowerCase() === userName.toLowerCase() || person.lastName.toLowerCase() === userName.toLowerCase()){
-					return true;
-			}
-			else{
-					return false;
-			}
-	});
-	}
 function getEye(){
-
-}
-function getOccupation(){
 
 }
