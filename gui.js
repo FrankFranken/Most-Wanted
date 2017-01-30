@@ -119,15 +119,18 @@ function findAge(people, yearBorn, birthDate){
 		printAge(people, searchAge, birthDate);
 }
 function printAge(people, searchAge, birthDate){
-	for (var i = 0; i < searchAge.length; i++) {
+	for (let i = 0; i < searchAge.length; i++) {
 		if(searchAge.length !== null){
 				alert("Age Found:\n\n"+ searchAge[i].firstName + " " + searchAge[i].lastName + "\nAge " + birthDate + "\nGender: " + searchAge[i].gender + "\nOccupation: " + searchAge[i].occupation);
-				initSearch(people);
 			}
-			}
+		else if(searchAge.length === null){
 			alert("No matches for this specific age");
-			initSearch(people);
+			}
 		}
+		initSearch(people);
+			}
+
+
 function displayResults(searchName, i, people){
 
 }
