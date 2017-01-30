@@ -52,7 +52,9 @@ function findName(people, userName, userlastName){
     printSearchName(people, searchName);
 }
 function printSearchName(people, searchName){
-	alert("Match found \nName: " + searchName[0].firstName + " " + searchName[0].lastName +"\nGender: " + searchName[0].gender + "\nOccupation: " + searchName[0].occupation);
+	alert("Match found \nName: " + searchName[0].firstName + " " +
+	searchName[0].lastName +"\nGender: " + searchName[0].gender + "\nOccupation: " +
+	searchName[0].occupation);
 	var decendentsChoice = prompt("Would your like to see this persons decendents? ");
 	switch(decendentsChoice){
 	case "yes":
@@ -87,7 +89,9 @@ function findDescendents(people, nameID, counter =-1, descendentslist=[]){
 function printDescendents(descendent, people){
 		for (var i = 0; i < descendent.length; i++) {
 			if(descendent.length !== null){
-          alert("Descendents:\n" + descendent[i].firstName + " " + descendent[i].lastName + "\nGender: " + descendent[i].gender + "\nOccupation: " + descendent[i].occupation);
+          alert("Descendents:\n" + descendent[i].firstName + " " +
+					descendent[i].lastName + "\nGender: " + descendent[i].gender + "\nOccupation: " +
+					descendent[i].occupation);
 					initSearch(people);
 				}
 				}
@@ -121,7 +125,9 @@ function findAge(people, yearBorn, birthDate){
 function printAge(people, searchAge, birthDate){
 	for (let i = 0; i < searchAge.length; i++) {
 		if(searchAge.length !== null){
-				alert("Age Found:\n\n"+ searchAge[i].firstName + " " + searchAge[i].lastName + "\nAge " + birthDate + "\nGender: " + searchAge[i].gender + "\nOccupation: " + searchAge[i].occupation);
+				alert("Age Found:\n\n"+ searchAge[i].firstName + " " +
+				searchAge[i].lastName + "\nAge " + birthDate + "\nGender: " +
+				searchAge[i].gender + "\nOccupation: " + searchAge[i].occupation);
 			}
 		else if(searchAge.length === null){
 			alert("No matches for this specific age");
@@ -130,7 +136,33 @@ function printAge(people, searchAge, birthDate){
 		initSearch(people);
 			}
 
-
+function getWeight(people){
+var userWeight = prompt("Please enter a weight to search (must be # of lbs)");
+filterWeight(people, userWeight);
+}
+function filterWeight(people, userWeight){
+	var weight = floatParse(userWeight);
+	var searchWeight = people.filter(function(person){
+				if(person.weight === weight){
+						return true;
+				}
+				else{
+						return false;
+				}
+		});
+		printWeight(people, searchWeight);
+	}
+function printWeight(people, searchWeight){
+	for (let i = 0; i < searchWeight.length; i++) {
+		if(searchWeight.length !== null){
+				alert("Weight Found:\n\n"+ searchWeight[i].firstName + " " + searchWeight[i].lastName  + "\nGender: " + searchWeight[i].gender + "\nOccupation: " + searchWeight[i].occupation);
+			}
+		else if(searchWeight.length === null){
+			alert("No matches for this specific weight");
+			}
+		}
+		initSearch(people);
+			}
 function displayResults(searchName, i, people){
 
 }
@@ -160,10 +192,6 @@ function findHeight(people, enterHeight){
 			}
 	});
 	}
-
-function getWeight(){
-
-}
 function getEye(){
 
 }
