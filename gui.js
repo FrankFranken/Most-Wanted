@@ -13,8 +13,14 @@ function initSearch(people){
 	}
 }
 function initSearchByTrait(people){
-		var search = prompt("Would you like to search by height, weight, age, occupation, or eyecolor?");
+		var search = prompt("Would you like to search by family, nextofkin, height, weight, age, occupation, or eyecolor?");
 		switch(search){
+			case "family":
+			getFamily(people);
+			break;
+			case "nextofkin":
+			getKin(people);
+			break;
 			case "height":
 			getHeight(people);
 			break;
@@ -250,15 +256,34 @@ function printEyeColor(people, filterEye){
 	}
 		initSearch(people);
 	}
-function displayResults(){
+	function getFamily(people){
+		var fName = prompt("enter fist name to find family");
+		var lName = prompt("enter last name to find family");
+		var Name = findUserFamilyName(people, fName, lName);
+		}
+function findUserFamilyName(people, fName, lName){
+	var searchNames = people.filter(function(person){
+				if(person.firstName.toLowerCase() === fName.toLowerCase() && person.lastName.toLowerCase() === lName.toLowerCase()){
+						return person.firstName && person.lastName;
+				}
+			});
 
-}
-function nextkin(){
+				var nID = searchNames[0].id; {
+	var searchChildren = people.filter(function(person){
+		if(person.parents[0] === nID){
+					return person.firstName && person.lastName;
+				}
+			});
 
-}
-function family(){
-
-}
-function isNumeric() {
-
-}
+	var searchSpouse = people.filter(function(person){
+				if(person.currentSpouse === nID){
+					return person.firstName && person.lastName;
+				}
+			});
+			for (var i = 0; i < 1; i++) {
+				alert("Family Members: \n\n" + searchNames[0].firstName + " " + searchNames[0].lastName + " \n" +
+				searchChildren[0].firstName + " " + searchChildren[0].lastName + " \n" +
+				searchSpouse[0].firstName + " " + searchSpouse[0].lastName);
+			}
+		}
+	}
